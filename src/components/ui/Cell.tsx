@@ -9,9 +9,8 @@ export default function Cell({ content, isHeaderCell, customClass = '', onClick 
   return (
     <div
       onClick={onClick}
-      className={`relative content-center w-10 h-10 border border-gray-400
-        ${isHeaderCell ? 'bg-gray-100' : 'bg-blue-100 hover:bg-blue-300'}
-         transition-colors duration-150 
+      className={`relative content-center w-10 h-10 transition-colors duration-150 
+        ${!isHeaderCell && 'bg-blue-100 hover:bg-blue-300 border border-gray-400'}
         ${customClass}`}>
       {content}
     </div>

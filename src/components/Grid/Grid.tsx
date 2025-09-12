@@ -8,7 +8,7 @@ type GridProps = {
 };
 export default function Grid({ progressCells, setProgressCells }: GridProps) {
   return progressCells.map((rows, rowIndex) => (
-    <div key={rowIndex} className="col-start-2 flex">
+    <div key={rowIndex} className="col-start-2 flex outline outline-gray-400">
       {[...rows].map((isMarkedCell, columnIndex) => (
         <GridCell
           key={columnIndex}
