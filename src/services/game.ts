@@ -1,10 +1,8 @@
 const _solution_array_mock2 = ['1111', '1010', '0111', '1011', '0111'];
-const solution_array_mock = ['1001', '1001', '1111', '1001', '1001'];
+const solution_array_mock = ['0100', '1000', '0100', '1001', '1001', '1111', '1001', '1001'];
 const empty_cell_symbol = '0';
 const filled_cell_symbol = '1';
 
-// "Filled cell" : case remplie
-// "Crossed cell" : case barrée (indiquant qu’elle ne doit pas être remplie)
 const computeHead = (gridLine: string) =>
   gridLine
     .split(new RegExp(`[^${filled_cell_symbol}]`))

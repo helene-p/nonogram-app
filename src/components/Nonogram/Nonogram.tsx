@@ -14,7 +14,7 @@ export default function Nonogram() {
   }, [solution, progressCells]);
 
   return (
-    <div className="relative grid grid-flow-row border border-blue-400 w-fit">
+    <div className="relative grid grid-flow-row outline-2 outline-blue-300 w-fit p-1">
       {victory && <Victory onClick={() => setProgressCells(emptyGrid)} />}
       <div className="col-start-2">
         <Header markedInstructions={columnInstructions} isColDirection />
