@@ -1,25 +1,25 @@
-import Counter from '@components/Counter';
 import './App.css';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import logimageSolution from './assets/logimage_demo_solution.png';
+import Nonogram from './components/Nonogram/Nonogram';
+import GameSetup from './components/ui/GameSetup';
+import Title from './components/ui/Title';
+import logo from '/logo.png';
 
 function App() {
   return (
-    <>
-      <div className="flex justify-center">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card text-blue-500">
-        <Counter />
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <div className="flex flex-col gap-5">
+      <Title />
+
+      <Nonogram />
+
+      <GameSetup title="Configuration">
+        <img src={logo} className="w-50" alt="Logo chat" />
+      </GameSetup>
+
+      <GameSetup title="Règles">
+        <img src={logimageSolution} className="max-w-[200px] -mt-5" alt="Logimage solution" />
+      </GameSetup>
+    </div>
   );
 }
 
