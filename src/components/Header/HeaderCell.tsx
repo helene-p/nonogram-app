@@ -6,11 +6,6 @@ export default function HeaderCell({ instruction }: { instruction: number }) {
   const handleClick = () => setMarked(!marked);
 
   return (
-    <Cell
-      content={instruction}
-      isHeaderCell
-      onClick={handleClick}
-      customClass={marked ? 'text-gray-400 line-through' : ''}
-    />
+    <Cell content={instruction} onMouseUp={handleClick} customClass={marked ? 'text-gray-400 line-through' : ''} />
   );
 }
