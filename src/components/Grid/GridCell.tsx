@@ -3,6 +3,7 @@ import Cell from '../ui/Cell';
 
 type GridCellProps = {
   isMarkedCell: boolean;
+  isUnmarkedCell: boolean;
   isSelectedCell: boolean;
   isRightClick: boolean;
   onMouseUp: (event: MouseEvent<HTMLDivElement>) => void;
@@ -12,6 +13,7 @@ type GridCellProps = {
 
 export default function GridCell({
   isMarkedCell,
+  isUnmarkedCell,
   isSelectedCell,
   isRightClick,
   onMouseDown,
@@ -32,17 +34,18 @@ export default function GridCell({
     onMouseOver();
   };
 
-  const rightClickColor = isSelectedCell && isRightClick && 'bg-blue-500';
+  const rightSelectionColor = isSelectedCell && isRightClick && 'bg-blue-500';
   const markedColor = isMarkedCell && 'bg-gray-600';
-  const selectionColor = isSelectedCell && !isRightClick && 'bg-gray-500';
-  const bgColor = rightClickColor || markedColor || selectionColor;
+  const leftSelectionColor = isSelectedCell && !isRightClick && 'bg-gray-500';
+  const bgColor = rightSelectionColor || markedColor || leftSelectionColor;
 
   return (
     <Cell
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseOver={handleMouseOver}
-      customClass={`bg-blue-100 border border-gray-400 hover:${!bgColor && 'bg-green-600'} ${bgColor}`}
+      customClass={`bg-blue-100 border border-gray-400 hover:${!bgColor && 'bg-green-600'} ${bgColor}
+       ${isUnmarkedCell && 'font-extrabold before:content-["\\002022"]'}`}
     />
   );
 }

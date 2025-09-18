@@ -1,4 +1,5 @@
 import { useGame } from '@/hooks/useGame';
+import { empty_cell_symbol, unmarked_cell_symbol } from '@/services/game';
 import { useEffect, useState } from 'react';
 import Grid from '../Grid/Grid';
 import Header from '../Header/Header';
@@ -10,7 +11,7 @@ export default function Nonogram() {
   const [victory, setVictory] = useState(false);
 
   useEffect(() => {
-    setVictory(solution.join('') === progressCells.join(''));
+    setVictory(solution.join('') === progressCells.join('').replaceAll(unmarked_cell_symbol, empty_cell_symbol));
   }, [solution, progressCells]);
 
   return (

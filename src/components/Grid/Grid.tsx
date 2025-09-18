@@ -1,4 +1,4 @@
-import { empty_cell_symbol, filled_cell_symbol } from '@/services/game';
+import { empty_cell_symbol, filled_cell_symbol, unmarked_cell_symbol } from '@/services/game';
 import { useState, type Dispatch, type MouseEvent, type SetStateAction } from 'react';
 import GridCell from './GridCell';
 
@@ -24,11 +24,18 @@ export default function Grid({ progressCells, setProgressCells }: GridProps) {
     setProgressCells(prevCells => {
       if (xStart === xEnd) {
         const [yMin, nb] = getChangeInfo(yStart, yEnd);
-        updateRow(progressCells, isLeftClick, xStart, yMin, nb);
+        const newValue = getNewValue(isLeftClick, yMin, nb, [...progressCells[xStart]]);
+        updateRow(progressCells, newValue, xStart, yMin, nb);
       } else if (yStart === yEnd) {
         const [xMin, nb] = getChangeInfo(xStart, xEnd);
+        const newValue = getNewValue(
+          isLeftClick,
+          xMin,
+          nb,
+          progressCells.map(row => row[yStart]),
+        );
         for (let i = xMin; i < nb + xMin; i++) {
-          updateRow(progressCells, isLeftClick, i, yStart);
+          updateRow(progressCells, newValue, i, yStart);
         }
       }
       return [...prevCells];
@@ -53,6 +60,7 @@ export default function Grid({ progressCells, setProgressCells }: GridProps) {
           <GridCell
             key={columnIndex}
             isMarkedCell={isMarkedCell === filled_cell_symbol}
+            isUnmarkedCell={isMarkedCell === unmarked_cell_symbol}
             isSelectedCell={isSelected}
             isRightClick={isRightClick}
             onMouseUp={onMouseUp}
@@ -70,8 +78,14 @@ export default function Grid({ progressCells, setProgressCells }: GridProps) {
 
 const getChangeInfo = (start = 0, end = 0) => [Math.min(start, end), Math.abs(start - end) + 1];
 
-const updateRow = (progressCells: string[], isLeftClick: boolean, rowIndex: number, colIndex: number, changeNb = 1) => {
+const updateRow = (progressCells: string[], newValue: string, rowIndex: number, colIndex: number, changeNb = 1) => {
   const row = progressCells[rowIndex];
-  const newValue = isLeftClick ? filled_cell_symbol : empty_cell_symbol;
   progressCells[rowIndex] = row.slice(0, colIndex) + newValue.repeat(changeNb) + row.slice(colIndex + changeNb);
+};
+
+const getNewValue = (isLeftClick: boolean, startIndex: number, length: number, selection: string[]) => {
+  if (isLeftClick) return filled_cell_symbol;
+
+  const hasFilledCell = selection.slice(startIndex, startIndex + length).includes(filled_cell_symbol);
+  return hasFilledCell ? empty_cell_symbol : unmarked_cell_symbol;
 };

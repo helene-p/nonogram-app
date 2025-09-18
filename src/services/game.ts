@@ -3,6 +3,7 @@ const solution_array_mock = ['1111111', '1011101', '1001001', '1000001', '101010
 const _solution_array_mock3 = ['0100', '1000', '0100', '1001', '1001', '1111', '1001', '1001'];
 const empty_cell_symbol = '0';
 const filled_cell_symbol = '1';
+const unmarked_cell_symbol = '.';
 
 const computeHead = (gridLine: string) =>
   gridLine
@@ -23,4 +24,4 @@ const computeHeads = (solution: string[]) => {
 const getInitGrid = (row_size: number, column_size: number) =>
   [...Array(row_size)].fill(empty_cell_symbol.repeat(column_size));
 
-export { computeHeads, empty_cell_symbol, filled_cell_symbol, getInitGrid, solution_array_mock };
+export { computeHeads, empty_cell_symbol, filled_cell_symbol, getInitGrid, solution_array_mock, unmarked_cell_symbol };
